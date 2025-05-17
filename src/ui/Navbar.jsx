@@ -15,6 +15,7 @@ import {
   Home,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { logo } from "../assets/data";
 
 const Navbar = () => {
   const [searchFocused, setSearchFocused] = useState(false);
@@ -68,9 +69,9 @@ const Navbar = () => {
       >
         {/* Logo */}
         <div className="flex items-center z-20">
-          <img src="/vite.svg" alt="Logo" className="h-8 w-8 mr-2" />
+          <img src={logo} alt="Logo" className="h-8 mr-2" />
           <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text flex items-center">
-            LearnHub
+            GraceGlow Empowerment Trust
           </span>
         </div>
 
