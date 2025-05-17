@@ -9,6 +9,8 @@ import SignUp from "./pages/Auth/SignUp";
 import Navbar from "./ui/Navbar";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
+import Course from "./pages/Course";
+import Details from "./pages/Course/Details";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/courses" element={<Course />} />
+        <Route path="/courses/details/:id" element={<Details />} />
       </Routes>
     </div>
   );
