@@ -5,7 +5,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Hero from "./pages/Hero";
 import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/Signup";
+import SignUp from "./pages/Auth/SignUp";
 import Navbar from "./ui/Navbar";
 
 function App() {
