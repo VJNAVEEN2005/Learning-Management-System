@@ -1,0 +1,116 @@
+Document Structure for Course Platform
+1. Authentication Pages
+Login Page
+
+For both Students and Admin
+
+Fields: Email, Password
+
+Option: Forgot Password, Remember Me
+
+Sign Up Page
+
+Only for Students
+
+Fields: Name, Email, Password, Confirm Password
+
+Email verification (optional)
+
+2. Admin Panel
+For managing courses, students, sessions, notes, etc.
+
+Admin Dashboard
+
+Overview of users, courses, sales
+
+Course Management
+
+Add New Course (with image, title, description, price)
+
+Edit/Delete Course
+
+Add Sessions to a course (Video uploads)
+
+Upload Notes (PDF/Docs) to each session
+
+User Management
+
+View registered students
+
+Block/Delete users
+
+Order/Payment Management
+
+See who bought which course
+
+Payment status
+
+3. Student Panel / User Pages
+Student Dashboard
+
+Shows purchased courses
+
+Recommended courses
+
+Course progress
+
+Browse Courses Page
+
+View all available courses
+
+Filters (category, free/paid)
+
+Enroll/Buy option
+
+Course Details Page
+
+Course overview
+
+Syllabus (sessions list)
+
+Instructor info
+
+Buy button (if not enrolled)
+
+Course Player Page
+
+Video player
+
+Session list (sidebar or tabs)
+
+Notes (downloadable PDFs for each session)
+
+Progress bar / Mark as complete
+
+Comments/Discussion (optional)
+
+Notes Page
+
+List of all downloaded/available notes per course
+
+4. Other Pages
+Profile Page
+
+View/update personal info
+
+Change password
+
+View enrolled courses
+
+Cart / Checkout Page
+
+List of selected courses
+
+Payment gateway integration
+
+Order History
+
+See all purchases made
+
+Support Page
+
+Contact form or chat support
+
+Notifications
+
+Updates about new sessions, notes, announcements
