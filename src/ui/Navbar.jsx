@@ -61,7 +61,11 @@ const Navbar = () => {
 
   return (
     <div className={`sticky top-0 z-50 w-full ${scrolled ? "shadow-md" : ""}`}>
-      <nav className={`flex justify-between items-center bg-white p-4 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
+      <nav
+        className={`flex justify-between items-center bg-white p-4 transition-all duration-300 ${
+          scrolled ? "py-2" : "py-4"
+        }`}
+      >
         {/* Logo */}
         <div className="flex items-center z-20">
           <img src="/vite.svg" alt="Logo" className="h-8 w-8 mr-2" />
@@ -143,11 +147,17 @@ const Navbar = () => {
                     <p className="text-sm font-medium">User Account</p>
                     <p className="text-xs text-gray-500">user@example.com</p>
                   </div>
-                  <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <a
+                    href="#"
+                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
                     <User size={16} className="mr-2" />
                     Profile
                   </a>
-                  <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <a
+                    href="#"
+                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
                     <Settings size={16} className="mr-2" />
                     Settings
                   </a>
@@ -163,13 +173,13 @@ const Navbar = () => {
               )}
             </div>
           ) : (
-            <button
-              onClick={toggleLogin}
+            <NavLink
+              to={"/login"}
               className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-lg transition-all flex items-center space-x-1"
             >
               <span>Login</span>
               <User size={16} />
-            </button>
+            </NavLink>
           )}
         </div>
 
@@ -185,7 +195,9 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div
         className={`fixed inset-0 bg-white z-10 flex flex-col transition-transform duration-300 ease-in-out ${
-          mobileMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
+          mobileMenuOpen
+            ? "transform translate-x-0"
+            : "transform translate-x-full"
         } md:hidden`}
       >
         <div className="p-4 pt-20">
@@ -233,11 +245,17 @@ const Navbar = () => {
                     <p className="text-sm text-gray-500">user@example.com</p>
                   </div>
                 </div>
-                <a href="#" className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a
+                  href="#"
+                  className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg"
+                >
                   <User size={20} className="mr-3" />
                   Profile
                 </a>
-                <a href="#" className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a
+                  href="#"
+                  className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg"
+                >
                   <Settings size={20} className="mr-3" />
                   Settings
                 </a>

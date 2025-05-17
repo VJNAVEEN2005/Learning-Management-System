@@ -1,8 +1,5 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Hero from "./pages/Hero";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
@@ -11,11 +8,16 @@ import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import Course from "./pages/Course";
 import Details from "./pages/Course/Details";
+import "./App.css";
 
 function App() {
+  const location = useLocation();
+  const hideNavbar = location.pathname === "/login" || location.pathname === "/signup";
+
   return (
     <div>
-      <Navbar/>
+      {!hideNavbar && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route path="/login" element={<Login />} />
