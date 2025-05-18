@@ -10,6 +10,14 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login logic here
+    if (!email || !password) {
+      alert("Please fill in all fields");
+    }
+    if (email === "admin@gmail.com" && password === "admin") {
+      alert("Login successful");
+      localStorage.setItem("user", JSON.stringify({ email }));
+      window.location.href = "/";
+    }
     console.log("Login attempt:", { email, password });
   };
 

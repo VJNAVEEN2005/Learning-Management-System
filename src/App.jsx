@@ -9,14 +9,22 @@ import AboutUs from "./pages/AboutUs";
 import Course from "./pages/Course";
 import Details from "./pages/Course/Details";
 import "./App.css";
+import { NavbarUser } from "./ui/NavbarUser";
+import ClientDashboard from "./pages/Client/ClientDashboard";
+import { Flex } from "@mantine/core";
+import Profile from "./pages/Client/Profile";
 
 function App() {
   const location = useLocation();
-  const hideNavbar = location.pathname === "/login" || location.pathname === "/signup";
+  const pathname = location.pathname;
+
+  const hideNavbar = pathname === "/login" || pathname === "/signup";
+  const showUserNavbar = pathname === "/dashboard" || pathname === "/profile";
 
   return (
     <div>
-      {!hideNavbar && <Navbar />}
+      {!hideNavbar && !showUserNavbar && <Navbar />}
+
 
       <Routes>
         <Route path="/" element={<Hero />} />
@@ -27,6 +35,17 @@ function App() {
         <Route path="/courses" element={<Course />} />
         <Route path="/courses/details/:id" element={<Details />} />
       </Routes>
+
+      {/* Client Routes */}
+      {showUserNavbar && (
+        <Flex>
+          <NavbarUser />
+          <Routes>
+            <Route path="/dashboard" element={<ClientDashboard />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Flex>
+      )}
     </div>
   );
 }

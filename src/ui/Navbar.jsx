@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { logo } from "../assets/data";
+import { Popover } from "@mantine/core";
+import { IconDashboard } from "@tabler/icons-react";
 
 const Navbar = () => {
   const [searchFocused, setSearchFocused] = useState(false);
@@ -45,6 +47,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
@@ -54,6 +62,12 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    setUserMenuOpen(false);
+  };
 
   // Toggle login status (demo only)
   const toggleLogin = () => {
@@ -127,51 +141,54 @@ const Navbar = () => {
           {/* Login/User Menu */}
           {isLoggedIn ? (
             <div className="relative">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setUserMenuOpen(!userMenuOpen);
-                }}
-                className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 rounded-full py-1 pl-1 pr-3 transition-colors"
-              >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center text-white font-semibold">
-                  U
-                </div>
-                <span className="text-sm font-medium">User</span>
-                <ChevronDown size={16} />
-              </button>
-
-              {/* User Dropdown Menu */}
-              {userMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 border border-gray-200">
-                  <div className="px-4 py-2 border-b border-gray-200">
-                    <p className="text-sm font-medium">User Account</p>
-                    <p className="text-xs text-gray-500">user@example.com</p>
-                  </div>
-                  <a
-                    href="#"
-                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <User size={16} className="mr-2" />
-                    Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <Settings size={16} className="mr-2" />
-                    Settings
-                  </a>
-                  <div className="border-t border-gray-200 mt-1"></div>
-                  <button
-                    onClick={toggleLogin}
-                    className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                  >
-                    <LogOut size={16} className="mr-2" />
-                    Sign Out
+              <Popover position="bottom" withArrow shadow="md">
+                <Popover.Target>
+                  <button className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 rounded-full py-1 pl-1 pr-3 transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center text-white font-semibold">
+                      U
+                    </div>
+                    <span className="text-sm font-medium">User</span>
+                    <ChevronDown size={16} />
                   </button>
-                </div>
-              )}
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 border border-gray-200">
+                    <div className="px-4 py-2 border-b border-gray-200">
+                      <p className="text-sm font-medium">User Account</p>
+                      <p className="text-xs text-gray-500">user@example.com</p>
+                    </div>
+                    <a
+                      href="#"
+                      className="flex items-center cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <User size={16} className="mr-2" />
+                      Profile
+                    </a>
+                    <NavLink
+                      to={"/dashboard"}
+                      className="flex items-center cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <IconDashboard size={16} className="mr-2"/>
+                      Dashboard
+                    </NavLink>
+                    <a
+                      href="#"
+                      className="flex cursor-pointer items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <Settings size={16} className="mr-2" />
+                      Settings
+                    </a>
+                    <div className="border-t border-gray-200 mt-1"></div>
+                    <button
+                      onClick={handleLogout}
+                      className="flex cursor-pointer items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                    >
+                      <LogOut size={16} className="mr-2" />
+                      Sign Out
+                    </button>
+                  </div>
+                </Popover.Dropdown>
+              </Popover>
             </div>
           ) : (
             <NavLink
@@ -261,7 +278,7 @@ const Navbar = () => {
                   Settings
                 </a>
                 <button
-                  onClick={toggleLogin}
+                  onClick={handleLogout}
                   className="flex items-center w-full px-4 py-3 mt-2 text-red-600 hover:bg-gray-100 rounded-lg"
                 >
                   <LogOut size={20} className="mr-3" />
