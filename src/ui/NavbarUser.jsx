@@ -40,9 +40,8 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 const mockdata = [
   { icon: IconGauge, label: "Dashboard", link: "/dashboard" },
   { icon: IconDeviceDesktopAnalytics, label: "Analytics", link: "/analytics" },
-  { icon: IconCalendarStats, label: "Releases", link: "/releases" },
   { icon: IconUser, label: "Profile", link: "/profile" },
-  { icon: IconBook, label: "Your Course", link: "/yourcourse" },
+  { icon: IconBook, label: "Your Course", link: "/yourcourses" },
   { icon: IconSettings, label: "Settings", link: "/settings" },
 ];
 

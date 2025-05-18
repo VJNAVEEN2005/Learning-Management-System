@@ -8,6 +8,7 @@
     light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
   background: linear-gradient(to bottom right, #4f46e5, #9333ea);
   color: white;
+  position: relative;
 }
 
 .navbarMain {

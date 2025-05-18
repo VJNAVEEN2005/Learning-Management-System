@@ -1,5 +1,4 @@
-import { useLocation } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Hero from "./pages/Hero";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
@@ -8,25 +7,34 @@ import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import Course from "./pages/Course";
 import Details from "./pages/Course/Details";
-import "./App.css";
 import { NavbarUser } from "./ui/NavbarUser";
 import ClientDashboard from "./pages/Client/ClientDashboard";
-import { Flex } from "@mantine/core";
 import Profile from "./pages/Client/Profile";
+import YourCourses from "./pages/Client/YourCourses";
+import Settings from "./pages/Client/Settings";
+import Analytics from "./pages/Client/Analytics";
+import PageNotFound from "./pages/PageNotFound";
+import { Flex } from "@mantine/core";
+import "./App.css";
 
 function App() {
   const location = useLocation();
   const pathname = location.pathname;
 
-  const hideNavbar = pathname === "/login" || pathname === "/signup";
-  const showUserNavbar = pathname === "/dashboard" || pathname === "/profile";
+  const isAuthPage = pathname === "/login" || pathname === "/signup";
+  const isUserDashboard =
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/profile") ||
+    pathname.startsWith("/yourcourses") ||
+    pathname.startsWith("/settings") ||
+    pathname.startsWith("/analytics");
 
   return (
     <div>
-      {!hideNavbar && !showUserNavbar && <Navbar />}
-
+      {!isAuthPage && !isUserDashboard && <Navbar />}
 
       <Routes>
+        {/* Public Pages */}
         <Route path="/" element={<Hero />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
@@ -34,18 +42,57 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/courses" element={<Course />} />
         <Route path="/courses/details/:id" element={<Details />} />
-      </Routes>
 
-      {/* Client Routes */}
-      {showUserNavbar && (
-        <Flex>
-          <NavbarUser />
-          <Routes>
-            <Route path="/dashboard" element={<ClientDashboard />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </Flex>
-      )}
+        {/* Dashboard Pages with User Navbar */}
+        <Route
+          path="/dashboard"
+          element={
+            <Flex pos="relative">
+              <NavbarUser />
+              <ClientDashboard />
+            </Flex>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Flex pos="relative">
+              <NavbarUser />
+              <Profile />
+            </Flex>
+          }
+        />
+        <Route
+          path="/yourcourses"
+          element={
+            <Flex pos="relative">
+              <NavbarUser />
+              <YourCourses />
+            </Flex>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <Flex pos="relative">
+              <NavbarUser />
+              <Settings />
+            </Flex>
+          }
+        />
+        <Route
+          path="/analytics"
+          element={
+            <Flex pos="relative">
+              <NavbarUser />
+              <Analytics />
+            </Flex>
+          }
+        />
+
+        {/* Catch-All */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </div>
   );
 }
