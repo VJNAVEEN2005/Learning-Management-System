@@ -16,6 +16,9 @@ import Analytics from "./pages/Client/Analytics";
 import PageNotFound from "./pages/PageNotFound";
 import { Flex } from "@mantine/core";
 import "./App.css";
+import CourseView from "./pages/Client/CourseView";
+import AdminAddCourse from "./pages/Admin/AdminAddCourse";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 function App() {
   const location = useLocation();
@@ -27,7 +30,9 @@ function App() {
     pathname.startsWith("/profile") ||
     pathname.startsWith("/yourcourses") ||
     pathname.startsWith("/settings") ||
-    pathname.startsWith("/analytics");
+    pathname.startsWith("/analytics") ||
+    pathname.startsWith("/courses/courseView") ||
+    pathname.startsWith("/AdminAddCourse");
 
   return (
     <div>
@@ -89,7 +94,28 @@ function App() {
             </Flex>
           }
         />
+        <Route
+          path="/courses/courseView/:id"
+          element={
+            <Flex pos="relative">
+              <NavbarUser />
+              <CourseView />
+            </Flex>
+          }
+        />
 
+        {/* Admin */}
+        <Route
+          path="/AdminAddCourse"
+          element={
+            <Flex pos="relative">
+              <NavbarUser />
+              <AdminAddCourse />
+            </Flex>
+          }
+        />
+
+        <Route path="adminDashboard" element={<AdminDashboard />} />
         {/* Catch-All */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
