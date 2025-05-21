@@ -32,7 +32,7 @@ function App() {
     pathname.startsWith("/settings") ||
     pathname.startsWith("/analytics") ||
     pathname.startsWith("/courses/courseView") ||
-    pathname.startsWith("/AdminAddCourse");
+    pathname.startsWith("/adminAddCourse");
 
   return (
     <div>
@@ -106,7 +106,7 @@ function App() {
 
         {/* Admin */}
         <Route
-          path="/AdminAddCourse"
+          path="/adminAddCourse"
           element={
             <Flex pos="relative">
               <NavbarUser />
