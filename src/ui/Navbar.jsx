@@ -85,7 +85,7 @@ const Navbar = () => {
         <div className="flex items-center z-20">
           <img src={logo} alt="Logo" className="h-8 mr-2" />
           <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text flex items-center">
-            GraceGlow Empowerment Trust
+            GraceGlow
           </span>
         </div>
 
