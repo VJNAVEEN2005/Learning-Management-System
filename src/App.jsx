@@ -19,6 +19,8 @@ import "./App.css";
 import CourseView from "./pages/Client/CourseView";
 import AdminAddCourse from "./pages/Admin/AdminAddCourse";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+import NavbarAdmin from "./ui/NavbarAdmin";
+import AdminCourseView from "./pages/Admin/AdminCourseView";
 
 function App() {
   const location = useLocation();
@@ -32,7 +34,7 @@ function App() {
     pathname.startsWith("/settings") ||
     pathname.startsWith("/analytics") ||
     pathname.startsWith("/courses/courseView") ||
-    pathname.startsWith("/adminAddCourse");
+    pathname.startsWith("/admin");
 
   return (
     <div>
@@ -106,16 +108,29 @@ function App() {
 
         {/* Admin */}
         <Route
-          path="/adminAddCourse"
+          path="/admin/adminAddCourse"
           element={
             <Flex pos="relative">
-              <NavbarUser />
+              <NavbarAdmin />
               <AdminAddCourse />
             </Flex>
           }
         />
 
-        <Route path="adminDashboard" element={<AdminDashboard />} />
+        <Route path="/admin/adminDashboard" element={
+            <Flex pos="relative">
+              <NavbarAdmin />
+              <AdminDashboard />
+            </Flex>
+          } />
+
+        <Route path="/admin/adminCourseView" element={
+            <Flex pos="relative">
+              <NavbarAdmin />
+              <AdminCourseView />
+            </Flex>
+          } />
+
         {/* Catch-All */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
