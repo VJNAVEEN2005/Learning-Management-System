@@ -1,7 +1,7 @@
 const api = {
-    current:"http://localhost:8000/",
+    current:"https://backend-project-eta-liart.vercel.app/",
     local:"http://localhost:8000/",
-    web:"https://api.example.com/",
+    web:"https://backend-project-eta-liart.vercel.app/",
 }
 
 export default api;
