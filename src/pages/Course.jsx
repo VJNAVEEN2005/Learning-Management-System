@@ -3,15 +3,15 @@ import {
   Search,
   Filter,
   BookOpen,
-  ChevronDown,
   Star,
   X,
-  Sliders,
-  Clock,
   DollarSign,
+  IndianRupee,
 } from "lucide-react";
 import { Autocomplete, Modal } from "@mantine/core";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import api from "../api/api";
 
 const Course = () => {
   // Sample courses data
@@ -88,11 +88,9 @@ const Course = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedLevel, setSelectedLevel] = useState("All");
+
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [priceRange, setPriceRange] = useState([0, 100]);
-  const [duration, setDuration] = useState("Any");
+  const [priceRange, setPriceRange] = useState([0, 10000]);
   const [sortBy, setSortBy] = useState("popularity");
 
   // Ref for search input and suggestions container
@@ -100,32 +98,22 @@ const Course = () => {
   const suggestionsRef = useRef(null);
 
   // Available categories and levels
-  const categories = [
-    "All",
-    "Web Development",
-    "Programming",
-    "Design",
-    "Data Science",
-    "Mobile Development",
-  ];
-  const levels = ["All", "Beginner", "Intermediate", "Advanced"];
-  const durations = [
-    "Any",
-    "0-1 hour",
-    "1-3 hours",
-    "3-6 hours",
-    "6-10 hours",
-    "10+ hours",
-  ];
-  const sortOptions = [
-    { value: "popularity", label: "Most Popular" },
-    { value: "newest", label: "Newest" },
-    { value: "price-low", label: "Price: Low to High" },
-    { value: "price-high", label: "Price: High to Low" },
-    { value: "rating", label: "Highest Rated" },
-  ];
 
   // Update search suggestions when search term changes
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await axios.get(`${api.current}api/courses`);
+        console.log("Fetched courses:", res.data.data);
+
+        setCourses(res.data.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+    fetchCourses();
+  }, []);
+
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setSearchSuggestions([]);
@@ -137,14 +125,12 @@ const Course = () => {
       .filter(
         (course) =>
           course.title.toLowerCase().includes(term) ||
-          course.instructor.toLowerCase().includes(term) ||
-          course.category.toLowerCase().includes(term)
+          course.instructor.toLowerCase().includes(term)
       )
       .slice(0, 5) // Limit to 5 suggestions
       .map((course) => ({
         id: course.id,
         title: course.title,
-        category: course.category,
         instructor: course.instructor,
       }));
 
@@ -170,43 +156,34 @@ const Course = () => {
     };
   }, []);
 
-  // Filtered courses based on search term, category, level, and advanced filters
+  // Filtered courses based on search term, category, level, and price
   const filteredCourses = courses.filter((course) => {
     const matchesSearch = course.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || course.category === selectedCategory;
-    const matchesLevel =
-      selectedLevel === "All" || course.level === selectedLevel;
     const matchesPrice =
       course.price >= priceRange[0] && course.price <= priceRange[1];
 
-    return matchesSearch && matchesCategory && matchesLevel && matchesPrice;
-  });
-
-  // Sort courses based on selected sort option
-  const sortedCourses = [...filteredCourses].sort((a, b) => {
-    switch (sortBy) {
-      case "price-low":
-        return a.price - b.price;
-      case "price-high":
-        return b.price - a.price;
-      case "rating":
-        return b.rating - a.rating;
-      case "newest":
-        // Assuming higher ID means newer course in this example
-        return b.id - a.id;
-      case "popularity":
-      default:
-        return b.students - a.students;
-    }
+    return matchesSearch && matchesPrice;
   });
 
   // Handle suggestion click
   const handleSuggestionClick = (suggestion) => {
     setSearchTerm(suggestion.title);
     setShowSuggestions(false);
+  };
+
+  const convertDriveLink = (url) => {
+    if (!url) return "";
+
+    // Extract file ID from Google Drive share URL
+    const match = url.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) {
+      return `https://drive.google.com/file/d/${match[1]}/preview`;
+    }
+
+    // If it's already a preview link or direct link, return as is
+    return url;
   };
 
   return (
@@ -239,13 +216,6 @@ const Course = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onFocus={() => setShowSuggestions(true)}
               />
-              {/* <Autocomplete
-                leftSection={<Search className="h-5 w-5 text-gray-400" />}
-                placeholder="Search courses..."
-                data={courses.map((course) => course.title)}
-                onChange={(e) => setSearchTerm(e.target.value)}
-        
-              /> */}
 
               {/* Search suggestions dropdown */}
               {showSuggestions && searchSuggestions.length > 0 && (
@@ -262,8 +232,6 @@ const Course = () => {
                       >
                         <span className="font-medium">{suggestion.title}</span>
                         <div className="flex items-center text-xs text-gray-500">
-                          <span>{suggestion.category}</span>
-                          <span className="mx-1">•</span>
                           <span>{suggestion.instructor}</span>
                         </div>
                       </li>
@@ -271,46 +239,6 @@ const Course = () => {
                   </ul>
                 </div>
               )}
-            </div>
-
-            {/* Category filter */}
-            <div className="w-full md:w-48">
-              <div className="relative">
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none"
-                >
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                  <ChevronDown className="h-4 w-4 text-gray-400" />
-                </div>
-              </div>
-            </div>
-
-            {/* Level filter */}
-            <div className="w-full md:w-48">
-              <div className="relative">
-                <select
-                  value={selectedLevel}
-                  onChange={(e) => setSelectedLevel(e.target.value)}
-                  className="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none"
-                >
-                  {levels.map((level) => (
-                    <option key={level} value={level}>
-                      {level}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                  <ChevronDown className="h-4 w-4 text-gray-400" />
-                </div>
-              </div>
             </div>
 
             {/* Filter button */}
@@ -326,43 +254,30 @@ const Course = () => {
 
         {/* Course Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sortedCourses.map((course) => (
+          {filteredCourses.map((course) => (
             <div
               key={course.id}
               className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105"
             >
-              <img
-                src={course.image}
-                alt={course.title}
+              <iframe
+                src={convertDriveLink(course.thumbnailUrl)}
+                frameborder="0"
                 className="w-full h-48 object-cover"
-              />
+              ></iframe>
               <div className="p-6">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded">
-                    {course.category}
-                  </span>
-                  <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded">
-                    {course.level}
-                  </span>
-                </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-800">
                   {course.title}
                 </h3>
                 <p className="text-gray-600 mb-4">by {course.instructor}</p>
-                <div className="flex items-center mb-4">
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <span className="ml-1 text-gray-700">{course.rating}</span>
-                  <span className="mx-2 text-gray-400">•</span>
-                  <span className="text-gray-600">
-                    {course.students.toLocaleString()} students
-                  </span>
-                </div>
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold text-gray-900">
-                    ${course.price}
+                    INR {course.price}
                   </span>
                   <div className="flex gap-2">
-                    <NavLink to={`/courses/details/${course.id}`} className="px-4 py-2 cursor-pointer bg-sky-600 text-white rounded-md hover:opacity-90 transition-opacity">
+                    <NavLink
+                      to={`/courses/details/${course._id}`}
+                      className="px-4 py-2 cursor-pointer bg-sky-600 text-white rounded-md hover:opacity-90 transition-opacity"
+                    >
                       Details
                     </NavLink>
                     <button className="px-4 py-2 bg-gradient-to-r cursor-pointer from-indigo-500 to-purple-500 text-white rounded-md hover:opacity-90 transition-opacity">
@@ -376,7 +291,7 @@ const Course = () => {
         </div>
 
         {/* Empty state */}
-        {sortedCourses.length === 0 && (
+        {filteredCourses.length === 0 && (
           <div className="bg-white rounded-lg shadow-lg p-10 text-center">
             <BookOpen className="h-16 w-16 mx-auto text-gray-400 mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
@@ -402,11 +317,11 @@ const Course = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-sm font-medium text-gray-700 flex items-center">
-                  <DollarSign className="h-4 w-4 mr-1" />
+                  <IndianRupee className="h-4 w-4 mr-1" />
                   Price Range
                 </label>
                 <span className="text-sm text-gray-500">
-                  ${priceRange[0]} - ${priceRange[1]}
+                  INR {priceRange[0]} - INR {priceRange[1]}
                 </span>
               </div>
               <div className="relative pt-1">
@@ -422,48 +337,6 @@ const Course = () => {
                 />
               </div>
             </div>
-
-            {/* Course Duration */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <Clock className="h-4 w-4 mr-1" />
-                Course Duration
-              </label>
-              <div className="grid grid-cols-2 gap-2">
-                {durations.map((dur) => (
-                  <div
-                    key={dur}
-                    onClick={() => setDuration(dur)}
-                    className={`px-4 py-2 rounded-md cursor-pointer border ${
-                      duration === dur
-                        ? "border-indigo-500 bg-indigo-50 text-indigo-700"
-                        : "border-gray-300 hover:border-gray-400"
-                    }`}
-                  >
-                    {dur}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Sort By */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <Sliders className="h-4 w-4 mr-1" />
-                Sort Results By
-              </label>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
           {/* Modal footer */}
@@ -471,8 +344,6 @@ const Course = () => {
             <button
               onClick={() => {
                 setPriceRange([0, 100]);
-                setDuration("Any");
-                setSortBy("popularity");
               }}
               className="px-4 py-2 border border-gray-300 rounded-md cursor-pointer text-gray-700 hover:bg-gray-100 transition-colors"
             >
