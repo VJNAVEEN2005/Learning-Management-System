@@ -1,29 +1,78 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, User, Lock } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+import api from "../../api/api";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rememberMe: false
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    if (!email || !password) {
-      alert("Please fill in all fields");
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await axios.post(`${api.current}api/users/login`, {
+        email: formData.email,
+        password: formData.password
+      });
+
+      const { user, accessToken, refreshToken } = response.data.data;
+
+      // Store tokens and user data
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("user", JSON.stringify({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        avatar: user.avatar
+      }));
+
+      // Store refresh token based on remember me selection
+      if (formData.rememberMe) {
+        localStorage.setItem("refreshToken", refreshToken);
+      } else {
+        sessionStorage.setItem("refreshToken", refreshToken);
+      }
+
+      // Set default authorization header for future requests
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
+      // Redirect to home/dashboard
+      navigate("/");
+      
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(
+        err.response?.data?.message || 
+        "Login failed. Please check your credentials and try again."
+      );
+    } finally {
+      setLoading(false);
     }
-    if (email === "admin@gmail.com" && password === "admin") {
-      alert("Login successful");
-      localStorage.setItem("user", JSON.stringify({ email }));
-      window.location.href = "/";
-    }
-    console.log("Login attempt:", { email, password });
   };
 
   const handleGoogleLogin = () => {
-    // Handle Google login logic here
-    console.log("Google login initiated");
+    // Implement Google OAuth redirection
+    window.location.href = "/api/users/google-auth";
   };
 
   return (
@@ -37,6 +86,12 @@ const Login = () => {
             Please sign in to your account
           </p>
         </div>
+
+        {error && (
+          <div className="p-3 text-sm text-red-700 bg-red-100 rounded-lg">
+            {error}
+          </div>
+        )}
 
         <div className="space-y-4">
           <button
@@ -90,8 +145,8 @@ const Login = () => {
                 type="email"
                 autoComplete="email"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="you@example.com"
               />
@@ -115,8 +170,8 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleChange}
                 className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="••••••••"
               />
@@ -140,8 +195,10 @@ const Login = () => {
             <div className="flex items-center">
               <input
                 id="remember-me"
-                name="remember-me"
+                name="rememberMe"
                 type="checkbox"
+                checked={formData.rememberMe}
+                onChange={handleChange}
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
               <label
@@ -153,21 +210,30 @@ const Login = () => {
             </div>
 
             <div className="text-sm">
-              <a
-                href="#"
+              <NavLink
+                to="/forgot-password"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Forgot your password?
-              </a>
+              </NavLink>
             </div>
           </div>
 
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={loading}
+              className={`group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                loading ? "opacity-75 cursor-not-allowed" : ""
+              }`}
             >
-              Sign in
+              {loading ? (
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              ) : null}
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </div>
         </form>

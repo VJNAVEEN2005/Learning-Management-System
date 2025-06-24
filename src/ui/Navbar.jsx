@@ -143,7 +143,7 @@ const Navbar = () => {
             <div className="relative">
               <Popover position="bottom" withArrow shadow="md">
                 <Popover.Target>
-                  <button className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 rounded-full py-1 pl-1 pr-3 transition-colors">
+                  <button className="flex items-center cursor-pointer space-x-2 bg-gray-100 hover:bg-gray-200 rounded-full py-1 pl-1 pr-3 transition-colors">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center text-white font-semibold">
                       U
                     </div>
@@ -151,8 +151,12 @@ const Navbar = () => {
                     <ChevronDown size={16} />
                   </button>
                 </Popover.Target>
-                <Popover.Dropdown>
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 border border-gray-200">
+                <Popover.Dropdown
+                  style={{
+                    padding: 0,
+                  }}
+                >
+                  <div className="m-0 w-48 bg-white rounded-lg shadow-lg z-10 border border-gray-200">
                     <div className="px-4 py-2 border-b border-gray-200">
                       <p className="text-sm font-medium">User Account</p>
                       <p className="text-xs text-gray-500">user@example.com</p>
@@ -168,7 +172,7 @@ const Navbar = () => {
                       to={"/dashboard"}
                       className="flex items-center cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
-                      <IconDashboard size={16} className="mr-2"/>
+                      <IconDashboard size={16} className="mr-2" />
                       Dashboard
                     </NavLink>
                     <a

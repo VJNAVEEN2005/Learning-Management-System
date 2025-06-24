@@ -21,6 +21,7 @@ import AdminAddCourse from "./pages/Admin/AdminAddCourse";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import NavbarAdmin from "./ui/NavbarAdmin";
 import AdminCourseView from "./pages/Admin/AdminCourseView";
+import Test from "./pages/Test";
 
 function App() {
   const location = useLocation();
@@ -132,6 +133,7 @@ function App() {
           } />
 
         {/* Catch-All */}
+        <Route path="/test" element={<Test />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
