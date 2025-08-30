@@ -1,147 +1,192 @@
-import { IconBrandInstagramFilled, IconBrandLinkedin, IconBrandLinkedinFilled, IconLocation, IconMail, IconPhone, IconPhoneFilled } from '@tabler/icons-react'
-import React, { useState } from 'react'
+import React from 'react';
 
 const Contact = () => {
-  const [formData, setState] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setState(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = () => {
-    // Form submission logic would go here
-    console.log('Form submitted:', formData)
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-6">
-      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
-        {/* Left side - Contact Info */}
-        <div className="lg:w-2/5 bg-gradient-to-r from-indigo-500 to-purple-500 p-12 text-white flex flex-col justify-between">
-          <div>
-            <h2 className="text-4xl font-bold mb-8">Let's talk.</h2>
-            <p className="mb-12 text-indigo-100">
-              Have questions or want to work together? We'd love to hear from you.
-            </p>
-          </div>
-          
-          <div className="space-y-6">
-            <div className="flex items-start">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
-                <IconMail className="text-purple-500"/>
-              </div>
-              <div>
-                <p className="font-medium">Email</p>
-                <p className="text-indigo-100 mt-1">contact@example.com</p>
-              </div>
-            </div>
+    <div className="relative min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-violet-100 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-16 left-12 w-36 h-36 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full opacity-20 animate-pulse blur-2xl"></div>
+        <div className="absolute top-48 right-16 w-28 h-28 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full opacity-25 animate-bounce blur-xl"></div>
+        <div className="absolute bottom-24 left-20 w-32 h-32 bg-gradient-to-r from-violet-400 to-pink-400 rounded-full opacity-30 animate-pulse blur-lg"></div>
+        <div className="absolute bottom-56 right-12 w-24 h-24 bg-gradient-to-r from-purple-300 to-indigo-300 rounded-full opacity-20 animate-bounce blur-2xl"></div>
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-60"></div>
+        <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-violet-500 rounded-full animate-ping opacity-70"></div>
+        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-indigo-400 rounded-full animate-ping opacity-50"></div>
+      </div>
+
+      <div className="relative p-6">
+        <div className="max-w-5xl mx-auto">
+          {/* Main contact card */}
+          <div className="relative bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-purple-100 overflow-hidden">
+            {/* Decorative header gradient */}
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600"></div>
             
-            <div className="flex items-start">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
-                 <IconPhone className="text-purple-500"/>
+            <div className="p-10 md:p-16 text-center space-y-12">
+              {/* Header section */}
+              <div className="space-y-6 animate-fade-in-up">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-900 via-violet-700 to-indigo-700">
+                    Contact Us
+                  </span>
+                </h1>
+                
+                <div className="relative animate-fade-in-up animation-delay-200">
+                  <h2 className="text-2xl md:text-3xl font-bold text-purple-700">
+                    Grace Glow Academy
+                  </h2>
+                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full animate-pulse"></div>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Phone</p>
-                <p className="text-indigo-100 mt-1">+1 (555) 123-4567</p>
+
+              {/* Contact information grid */}
+              <div className="grid md:grid-cols-2 gap-8 animate-fade-in-up animation-delay-400">
+                {/* Address card */}
+                <div className="group relative bg-gradient-to-br from-purple-50 to-violet-50 p-8 rounded-3xl border border-purple-100 shadow-xl hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-500 hover:scale-105">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-violet-100/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative">
+                    <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">🏫</div>
+                    <h3 className="text-xl font-bold text-purple-900 mb-4">Visit Our Campus</h3>
+                    <p className="text-gray-700 leading-relaxed">
+                      KSM Emporium, 1, 2, 3 Sri Dhanalakshmi Nagar,<br/>
+                      Valudareddi Post, Villuppuram – 605401
+                    </p>
+                  </div>
+                </div>
+
+                {/* Contact details card */}
+                <div className="group relative bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-3xl border border-indigo-100 shadow-xl hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 hover:scale-105">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/50 to-purple-100/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative">
+                    <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">📱</div>
+                    <h3 className="text-xl font-bold text-purple-900 mb-4">Get In Touch</h3>
+                    <div className="space-y-3 text-gray-700">
+                      <div className="flex items-center justify-center">
+                        <span className="text-2xl mr-3">📞</span>
+                        <a href="tel:+919360426415" className="text-purple-700 font-semibold hover:text-purple-900 transition-colors">
+                          +91 93604 26415
+                        </a>
+                      </div>
+                      <div className="flex items-center justify-center">
+                        <span className="text-2xl mr-3">📧</span>
+                        <a href="mailto:support@graceglowacademy.org" className="text-purple-700 font-semibold hover:text-purple-900 transition-colors">
+                          support@graceglowacademy.org
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            
-            <div className="flex items-start">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
-                 <IconLocation className="text-purple-500"/>
+
+              {/* Learning modes section */}
+              <div className="relative animate-fade-in-up animation-delay-600">
+                <div className="bg-gradient-to-r from-violet-50 via-purple-50 to-indigo-50 p-8 rounded-3xl border border-violet-100 shadow-xl">
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="text-6xl">🌐</div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-violet-700 mb-4">
+                    Learning Modes Available
+                  </h3>
+                  <p className="text-lg text-gray-700">
+                    <span className="font-bold text-purple-700">Online Classes</span> (Zoom/Google Meet) & 
+                    <span className="font-bold text-violet-700"> Offline Classes</span> (On-Campus)
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Location</p>
-                <p className="text-indigo-100 mt-1">123 Innovation Drive<br/>Tech City, CA 90210</p>
+
+              {/* Action buttons */}
+              <div className="grid md:grid-cols-3 gap-6 animate-fade-in-up animation-delay-800">
+                <a href="#" className="group relative bg-white/80 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-purple-100 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative">
+                    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🗺️</div>
+                    <h4 className="font-bold text-purple-900 mb-2">Google Map Link</h4>
+                    <p className="text-sm text-gray-600">Find us easily</p>
+                  </div>
+                </a>
+
+                <a href="#" className="group relative bg-white/80 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-green-100 hover:shadow-2xl hover:shadow-green-200/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative">
+                    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">💬</div>
+                    <h4 className="font-bold text-green-700 mb-2">Join WhatsApp Group</h4>
+                    <p className="text-sm text-gray-600">Instant updates</p>
+                  </div>
+                </a>
+
+                <a href="#" className="group relative bg-white/80 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-blue-100 hover:shadow-2xl hover:shadow-blue-200/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative">
+                    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">📝</div>
+                    <h4 className="font-bold text-blue-700 mb-2">Contact Form</h4>
+                    <p className="text-sm text-gray-600">Send us a message</p>
+                  </div>
+                </a>
               </div>
-            </div>
-          </div>
-          
-          <div className="mt-12">
-            <div className="flex space-x-4">
-              <a href="#" className="bg-white bg-opacity-20 p-2 rounded-full hover:bg-opacity-30 transition-all">
-                <IconBrandLinkedinFilled className="text-purple-500"/>
-              </a>
-              <a href="#" className="bg-white bg-opacity-20 p-2 rounded-full hover:bg-opacity-30 transition-all">
-                 <IconBrandInstagramFilled className="text-purple-500"/>
-              </a>
-              <a href="#" className="bg-white bg-opacity-20 p-2 rounded-full hover:bg-opacity-30 transition-all">
-                 <IconPhoneFilled className="text-purple-500"/>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        {/* Right side - Form */}
-        <div className="lg:w-3/5 p-12">
-          <div className="mb-10">
-            <h3 className="text-3xl font-bold text-gray-800">Send us a message</h3>
-            <p className="text-gray-500 mt-2">Feel free to reach out to us with any questions or inquiries.</p>
-          </div>
-          
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-indigo-500 focus:ring-0"
-                  placeholder="John Doe"
-                />
+
+              {/* Call to action */}
+              <div className="relative mt-16 animate-fade-in-up animation-delay-1000">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-200 via-violet-200 to-indigo-200 rounded-3xl blur-2xl opacity-30 scale-105"></div>
+                <div className="relative bg-white/90 backdrop-blur-lg p-8 rounded-3xl border-2 border-purple-200 shadow-xl">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="text-5xl">✨</div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-violet-700 mb-4">
+                    Ready to Start Your Journey?
+                  </h3>
+                  <p className="text-lg text-gray-700 mb-6">
+                    Contact us today and take the first step towards speaking with grace and shining with glow!
+                  </p>
+                  <button className="group bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full shadow-xl transition-all duration-500 transform hover:scale-110 hover:shadow-purple-500/50">
+                    <span className="flex items-center justify-center">
+                      Get Started Today
+                      <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </button>
+                </div>
               </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-indigo-500 focus:ring-0"
-                  placeholder="john@example.com"
-                />
-              </div>
-            </div>
-            
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-indigo-500 focus:ring-0"
-                placeholder="Your message here..."
-              ></textarea>
-            </div>
-            
-            <div>
-              <button
-                onClick={handleSubmit}
-                className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium rounded-lg hover:shadow-lg transition-all focus:outline-none"
-              >
-                Send Message
-              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default Contact
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
+        .animation-delay-200 {
+          animation-delay: 0.2s;
+        }
+        .animation-delay-400 {
+          animation-delay: 0.4s;
+        }
+        .animation-delay-600 {
+          animation-delay: 0.6s;
+        }
+        .animation-delay-800 {
+          animation-delay: 0.8s;
+        }
+        .animation-delay-1000 {
+          animation-delay: 1.0s;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default Contact;

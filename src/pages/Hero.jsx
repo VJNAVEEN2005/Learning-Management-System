@@ -1,141 +1,142 @@
-import { useState } from 'react';
-import { BookOpen, Star, Users, CheckCircle, ArrowRight } from 'lucide-react';
-
 export default function Hero() {
-  const [email, setEmail] = useState('');
-
   return (
-    <div className="bg-gradient-to-br from-violet-50 to-purple-100 overflow-hidden">
-      {/* Decorative elements */}
+    <div className="relative bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-100 overflow-hidden min-h-screen">
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 left-10 w-40 h-40 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full opacity-20 animate-pulse blur-2xl"></div>
+        <div className="absolute top-32 right-20 w-32 h-32 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-30 animate-bounce blur-xl"></div>
+        <div className="absolute bottom-20 left-16 w-24 h-24 bg-gradient-to-r from-violet-400 to-pink-400 rounded-full opacity-25 animate-pulse blur-lg"></div>
+        <div className="absolute bottom-40 right-10 w-36 h-36 bg-gradient-to-r from-purple-300 to-blue-300 rounded-full opacity-20 animate-bounce blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full opacity-40 animate-pulse blur-md"></div>
+      </div>
+
+      {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-violet-200 opacity-40 blur-3xl"></div>
-        <div className="absolute top-40 -left-20 w-72 h-72 rounded-full bg-purple-200 opacity-30 blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-60"></div>
+        <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-violet-500 rounded-full animate-ping opacity-70"></div>
+        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-indigo-400 rounded-full animate-ping opacity-50"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="pt-16 pb-20 md:pt-24 md:pb-28 flex flex-col md:flex-row items-center">
-          {/* Left Content */}
-          <div className="md:w-1/2 z-10">
-            <div className="flex items-center mb-4">
-              <span className="bg-violet-200 text-violet-800 px-3 py-1 rounded-full text-sm font-medium">
-                New curriculum available!
+      <div className="relative max-w-6xl mx-auto px-4 py-16">
+        {/* Animated header tagline */}
+        <div className="flex justify-center items-center mb-16 animate-fade-in-up">
+          <div className="group bg-white/90 backdrop-blur-lg px-8 py-4 rounded-full shadow-2xl border border-purple-200 hover:shadow-purple-200/50 transition-all duration-500 hover:scale-105">
+            <span className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent group-hover:from-purple-700 group-hover:to-violet-700">
+              ✨ Speak with Grace. Shine with Glow. ✨
+            </span>
+          </div>
+        </div>
+
+        {/* Hero content with staggered animations */}
+        <div className="text-center space-y-12">
+          {/* Main headings */}
+          <div className="space-y-8">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black leading-tight animate-fade-in-up">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-900 via-violet-700 to-indigo-700 drop-shadow-sm">
+                Grace Glow
               </span>
-              <div className="ml-3 flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} size={16} className="text-violet-500 fill-violet-500" />
-                ))}
-              </div>
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Master English with <span className="text-violet-700">Confidence</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 mt-2">
+                English Academy
+              </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-700 mb-8">
-              Personalized learning paths, interactive lessons, and live tutoring to help you become fluent faster than ever before.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="relative">
+              <h2 className="text-2xl md:text-4xl font-bold text-purple-800 animate-fade-in-up animation-delay-200">
+                Speak with Grace. Shine with Glow.
+              </h2>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full animate-pulse"></div>
+            </div>
+
+            <div className="max-w-4xl mx-auto animate-fade-in-up animation-delay-400">
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium">
+                Transform your communication with our <span className="text-purple-700 font-bold">2-month Spoken English program</span> — available both <span className="text-violet-700 font-bold">online and offline</span>. Learn how to express fluently, speak confidently, and unlock opportunities with English that works in the real world.
+              </p>
+            </div>
+          </div>
+
+          {/* Enhanced feature showcase */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16 animate-fade-in-up animation-delay-600">
+            <div className="group relative bg-white/80 backdrop-blur-lg p-8 rounded-3xl shadow-xl border border-purple-100 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
               <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="px-6 py-4 w-full sm:w-80 rounded-full border border-violet-200 focus:outline-none focus:ring-2 focus:ring-violet-500 shadow-sm"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">💬</div>
+                <h3 className="text-xl font-bold text-purple-900 mb-3">Real-life Speaking</h3>
+                <p className="text-gray-600">Practice conversations that matter in your daily life and career</p>
               </div>
-              <button className="bg-violet-600 hover:bg-violet-700 text-white px-8 py-4 rounded-full font-medium shadow-lg transition-all flex items-center justify-center gap-2 group">
-                Start Learning Free
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+            </div>
+
+            <div className="group relative bg-white/80 backdrop-blur-lg p-8 rounded-3xl shadow-xl border border-purple-100 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+              <div className="relative">
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">🎓</div>
+                <h3 className="text-xl font-bold text-purple-900 mb-3">Corporate-trained Mentors</h3>
+                <p className="text-gray-600">Learn from experienced professionals who understand business communication</p>
+              </div>
+            </div>
+
+            <div className="group relative bg-white/80 backdrop-blur-lg p-8 rounded-3xl shadow-xl border border-purple-100 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+              <div className="relative">
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">🧑‍🏫</div>
+                <h3 className="text-xl font-bold text-purple-900 mb-3">Online & Offline Modes</h3>
+                <p className="text-gray-600">Choose the learning style that fits your schedule and preferences</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Spectacular CTA section */}
+          <div className="relative animate-fade-in-up animation-delay-800">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-200 via-violet-200 to-indigo-200 rounded-full blur-3xl opacity-30 scale-150"></div>
+            <div className="relative flex flex-col sm:flex-row gap-8 justify-center items-center">
+              <button className="group relative bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white font-bold py-6 px-12 rounded-full shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-purple-500/50 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-violet-700 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative flex items-center justify-center text-xl">
+                  Join Now
+                  <svg className="w-6 h-6 ml-3 group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               </button>
-            </div>
-            
-            <div className="flex flex-wrap items-center gap-6 text-gray-600">
-              <div className="flex items-center gap-2">
-                <CheckCircle size={18} className="text-violet-600" />
-                <span>7-day free trial</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle size={18} className="text-violet-600" />
-                <span>No credit card required</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle size={18} className="text-violet-600" />
-                <span>Cancel anytime</span>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right Content - Feature Cards */}
-          <div className="md:w-1/2 mt-12 md:mt-0 z-10">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-6 rounded-xl shadow-md border border-violet-100 transform transition-transform hover:-translate-y-1">
-                <div className="bg-violet-100 p-3 rounded-lg inline-block mb-4">
-                  <BookOpen size={24} className="text-violet-700" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">Comprehensive Curriculum</h3>
-                <p className="text-gray-600">Structured lessons covering speaking, reading, and writing</p>
-              </div>
               
-              <div className="bg-white p-6 rounded-xl shadow-md border border-violet-100 transform transition-transform hover:-translate-y-1">
-                <div className="bg-violet-100 p-3 rounded-lg inline-block mb-4">
-                  <Users size={24} className="text-violet-700" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">Native Tutors</h3>
-                <p className="text-gray-600">Schedule 1-on-1 sessions with certified English teachers</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-xl shadow-md border border-violet-100 transform transition-transform hover:-translate-y-1 mt-4">
-                <div className="bg-violet-100 p-3 rounded-lg inline-block mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-violet-700">
-                    <path d="M12 8V9"></path>
-                    <path d="M12 12h.01"></path>
-                    <path d="M3 8c0 3.5 2 5 9 5 7 0 9-1.5 9-5s-2-5-9-5c-7 0-9 1.5-9 5z"></path>
-                    <path d="M19 12v4c0 1.5-1.5 2-6 2h-2c-4.5 0-6-.5-6-2v-4"></path>
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-lg mb-2">AI-Powered Learning</h3>
-                <p className="text-gray-600">Adaptive recommendations based on your performance</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-xl shadow-md border border-violet-100 transform transition-transform hover:-translate-y-1 mt-4">
-                <div className="bg-violet-100 p-3 rounded-lg inline-block mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-violet-700">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 6v6l4 2"></path>
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-lg mb-2">Study Anywhere</h3>
-                <p className="text-gray-600">Access your lessons on any device, anytime</p>
-              </div>
+              {/* <button className="group bg-white/95 backdrop-blur-lg border-3 border-purple-600 text-purple-700 font-bold py-6 px-12 rounded-full shadow-2xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-violet-50 hover:border-purple-700 hover:shadow-purple-300/50 transition-all duration-500 transform hover:scale-110">
+                <span className="text-xl group-hover:text-purple-800 transition-colors duration-300">Explore Courses</span>
+              </button> */}
             </div>
           </div>
         </div>
-        
-        {/* Stats Bar */}
-        <div className="bg-white py-6 px-8 rounded-2xl shadow-lg flex flex-wrap justify-around items-center mb-16 border border-violet-100">
-          <div className="text-center px-4 py-2">
-            <p className="text-2xl md:text-3xl font-bold text-violet-700">25K+</p>
-            <p className="text-gray-600">Students</p>
-          </div>
-          <div className="hidden md:block w-px h-12 bg-gray-200"></div>
-          <div className="text-center px-4 py-2">
-            <p className="text-2xl md:text-3xl font-bold text-violet-700">500+</p>
-            <p className="text-gray-600">Lessons</p>
-          </div>
-          <div className="hidden md:block w-px h-12 bg-gray-200"></div>
-          <div className="text-center px-4 py-2">
-            <p className="text-2xl md:text-3xl font-bold text-violet-700">98%</p>
-            <p className="text-gray-600">Satisfaction</p>
-          </div>
-          <div className="hidden md:block w-px h-12 bg-gray-200"></div>
-          <div className="text-center px-4 py-2">
-            <p className="text-2xl md:text-3xl font-bold text-violet-700">187</p>
-            <p className="text-gray-600">Countries</p>
-          </div>
-        </div>
+
+        {/* Bottom decorative wave */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100/50 to-transparent"></div>
       </div>
+
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
+        .animation-delay-200 {
+          animation-delay: 0.2s;
+        }
+        .animation-delay-400 {
+          animation-delay: 0.4s;
+        }
+        .animation-delay-600 {
+          animation-delay: 0.6s;
+        }
+        .animation-delay-800 {
+          animation-delay: 0.8s;
+        }
+      `}</style>
     </div>
   );
 }
