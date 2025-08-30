@@ -28,7 +28,7 @@ const Navbar = () => {
 
   const navItems = [
     { id: "", icon: <Home size={18} />, label: "Home" },
-    { id: "courses", icon: <Book size={18} />, label: "Courses" },
+    //{ id: "courses", icon: <Book size={18} />, label: "Courses" },
     { id: "about", icon: <Calendar size={18} />, label: "About" },
     { id: "contact", icon: <Trophy size={18} />, label: "Contact" },
   ];
@@ -112,7 +112,7 @@ const Navbar = () => {
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center space-x-4">
           {/* Search Bar */}
-          <div
+          {/* <div
             className={`relative transition-all duration-300 ${
               searchFocused ? "w-64" : "w-48"
             }`}
@@ -128,18 +128,18 @@ const Navbar = () => {
               size={16}
               className="absolute left-3 top-2.5 text-gray-400"
             />
-          </div>
+          </div> */}
 
           {/* Notifications */}
-          <button className="relative p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
+          {/* <button className="relative p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
             <Bell size={20} />
             <span className="absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
               3
             </span>
-          </button>
+          </button> */}
 
           {/* Login/User Menu */}
-          {isLoggedIn ? (
+          {/* {isLoggedIn ? (
             <div className="relative">
               <Popover position="bottom" withArrow shadow="md">
                 <Popover.Target>
@@ -202,7 +202,7 @@ const Navbar = () => {
               <span>Login</span>
               <User size={16} />
             </NavLink>
-          )}
+          )} */}
         </div>
 
         {/* Mobile Menu Button */}
