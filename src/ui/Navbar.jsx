@@ -13,6 +13,7 @@ import {
   Menu,
   X,
   Home,
+  Phone,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { logo } from "../assets/data";
@@ -30,7 +31,7 @@ const Navbar = () => {
     { id: "", icon: <Home size={18} />, label: "Home" },
     //{ id: "courses", icon: <Book size={18} />, label: "Courses" },
     { id: "about", icon: <Calendar size={18} />, label: "About" },
-    { id: "contact", icon: <Trophy size={18} />, label: "Contact" },
+    { id: "contact", icon: <Phone size={18} />, label: "Contact" },
   ];
 
   // Handle scroll effects
