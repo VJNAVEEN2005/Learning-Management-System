@@ -140,14 +140,19 @@ const Contact = () => {
                   <p className="text-lg text-gray-700 mb-6">
                     Contact us today and take the first step towards speaking with grace and shining with glow!
                   </p>
-                  <button className="group bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full shadow-xl transition-all duration-500 transform hover:scale-110 hover:shadow-purple-500/50">
-                    <span className="flex items-center justify-center">
+                  {/* <button className="group relative bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full shadow-xl overflow-hidden transition-all duration-500 transform hover:scale-110 hover:shadow-purple-500/50">
+                
+                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500/20 via-transparent to-indigo-500/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pulse-animation"></span>
+                    
+            
+                    <span className="relative flex items-center justify-center">
                       Get Started Today
-                      <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -166,8 +171,30 @@ const Contact = () => {
             transform: translateY(0);
           }
         }
+        @keyframes pulse-glow {
+          0% {
+            box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+          }
+          70% {
+            box-shadow: 0 0 0 15px rgba(139, 92, 246, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+          }
+        }
+        @keyframes shimmer {
+          0% {
+            background-position: -100% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
         .animate-fade-in-up {
           animation: fade-in-up 0.8s ease-out forwards;
+        }
+        .pulse-animation {
+          animation: pulse-glow 2s infinite;
         }
         .animation-delay-200 {
           animation-delay: 0.2s;

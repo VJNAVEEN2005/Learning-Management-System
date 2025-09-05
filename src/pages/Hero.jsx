@@ -88,7 +88,7 @@ export default function Hero() {
           <div className="relative animate-fade-in-up animation-delay-800">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-200 via-violet-200 to-indigo-200 rounded-full blur-3xl opacity-30 scale-150"></div>
             <div className="relative flex flex-col sm:flex-row gap-8 justify-center items-center">
-              <button className="group relative bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white font-bold py-6 px-12 rounded-full shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-purple-500/50 overflow-hidden">
+              {/* <button className="group relative bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white font-bold py-6 px-12 rounded-full shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-purple-500/50 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-violet-700 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 <span className="relative flex items-center justify-center text-xl">
@@ -97,7 +97,7 @@ export default function Hero() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
-              </button>
+              </button> */}
               
               {/* <button className="group bg-white/95 backdrop-blur-lg border-3 border-purple-600 text-purple-700 font-bold py-6 px-12 rounded-full shadow-2xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-violet-50 hover:border-purple-700 hover:shadow-purple-300/50 transition-all duration-500 transform hover:scale-110">
                 <span className="text-xl group-hover:text-purple-800 transition-colors duration-300">Explore Courses</span>
